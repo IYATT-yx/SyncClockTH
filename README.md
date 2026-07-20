@@ -4,11 +4,10 @@
 一个支持联网对时，显示时间和温湿度的小玩意。刚学 ESP32，探索性做的，目前还不知道有什么问题，连续运行测试中。
 
 ![alt text](docs/预览效果.jpg)  
-![alt text](docs/esp32.png)  
 基本逻辑就是通电后，连接设定好的 WiFi，然后同步时间，同步完成后关闭 WiFi，之后就是循环每秒刷新一次 OLED 显示内容，最下面一行是温度和湿度。另外对于周期性时间同步，只是简单实现，每天到 00:00:00 就重启 ESP32，然后就会从头走一遍。
 
 2025/6/29  
-最近我买了台 3D 打印机，自己画了一个[外壳](./resources/温湿度计外壳.STEP)。
+最近我买了台 3D 打印机，自己画了[外壳](./resources/)。  
 ![alt text](docs/image2.png)  
 ![alt text](docs/image3.png)  
 
@@ -19,9 +18,17 @@
 
 ## 硬件
 
-ESP32-WROOM-32  
-128x64 IIC OLED  
-SHT30 温湿度计  
+* ESP32-WROOM-32  
+![alt text](docs/esp32.png)  
+
+* 128x64 IIC OLED  
+![alt text](docs/image4.png)  
+
+* SHT30 温湿度计  
+![alt text](docs/image5.png)  
+
+* DS1302 实时时钟模块  
+![alt text](docs/image6.png)  
 
 ## 软件
 
@@ -31,9 +38,15 @@ SHT30 温湿度计
 
 ## 引脚接线
 
-SHT30 和 OLED 都是使用 IIC 通信，两者的 SDA 和 SCL 可以各自接到一起，然后插到 ESP32 引脚上。  
+SHT30 和 OLED 都是使用 IIC 通信，两者的 SDA 和 SCL 可以各自并到一起，然后插到 ESP32 引脚上。  
 * SDA - 21
 * SCL - 22  
+* CLK - 14
+* DAT - 13
+* RST - 27
+* 触摸开关 - 4  
+
+esp32 自带有触摸开关，直接引线出来就行，触摸导线就能感应到。  
 
 # 许可证
 
